@@ -1,32 +1,35 @@
 #!/usr/bin/env python3
 
 class Plant:
-    def __init__(self, name: str, height: int, age: int) -> None:
-        self.name = name
+    def __init__(self, name: str, height: float, age: int) -> None:
+        self.name = name.capitalize()
         self.height = height
         self.days = age
 
-    def get_info(self) -> None:
-        print(f"Created: {self.name} ({self.height}cm, {self.days} days)")
+    def grow(self) -> None:
+        self.height += 0.8
+
+    def age(self) -> None:
+        self.days += 1
+
+    def show(self) -> None:
+        print(f"{self.name}: {round(self.height, 1)}cm, {self.days} days old")
 
 
 def main() -> None:
+    print("=== Plant Factory Output ===")
+
     plants = [
-        Plant("Rose", 25, 30),
-        Plant("Oak", 200, 365),
-        Plant("Cactus", 5, 90),
-        Plant("Sunflower", 80, 45),
-        Plant("Fern", 15, 120)
+        Plant("rose", 25.0, 30),
+        Plant("oak", 200.0, 365),
+        Plant("cactus", 5.0, 90),
+        Plant("sunflower", 80.0, 45),
+        Plant("fern", 15.0, 120)
     ]
 
-    print("=== Plant Factory Output ===")
-    total = 0
     for plant in plants:
-        plant.get_info()
-        total += 1
-    print("")
-
-    print(f"Total plants created: {total}")
+        print("Created: ", end="")
+        plant.show()
 
 
 if __name__ == "__main__":
