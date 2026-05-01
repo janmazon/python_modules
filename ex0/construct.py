@@ -21,9 +21,9 @@ def construct() -> None:
 
         print("Then run this program again.")
     else:
-        venv_name = os.path.basename(sys.prefix)
         print("\nMATRIX STATUS: Welcome to the construct\n")
 
+        venv_name = os.path.basename(sys.prefix)
         print(f"Current Python: {sys.executable}")
         print(f"Virtual Environment: {venv_name}")
         print(f"Environment Path: {sys.prefix}\n")
