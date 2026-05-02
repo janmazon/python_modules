@@ -67,7 +67,7 @@ def generate_visualization(data_frame: Any) -> None:
         print(f"Error: {e}")
 
 
-def main() -> None:
+def loading() -> None:
     print("\nLOADING STATUS: Loading programs...\n")
 
     if check_dependencies():
@@ -75,4 +75,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    loading()
