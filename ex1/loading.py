@@ -1,4 +1,4 @@
-import importlib
+import importlib.metadata
 from typing import Any
 
 
@@ -6,24 +6,22 @@ def check_dependencies() -> bool:
     dependencies: dict[str, str] = {
         "pandas": "Data manipulation",
         "numpy": "Numerical computation",
-        "requests": "Network access",
         "matplotlib": "Visualization",
     }
 
     print("Checking dependencies:")
 
-    missing: list[str] = []
+    not_installed: list[str] = []
 
     for dependency, message in dependencies.items():
         try:
-            module = importlib.import_module(dependency)
-            version = module.__version__
+            version = importlib.metadata.version(dependency)
             print(f"[OK] {dependency} ({version}) - {message} ready")
         except ImportError:
-            print(f"[MISSING] {dependency} - Not installed")
-            missing.append(dependency)
+            print(f"[ERROR] {dependency} - Not installed")
+            not_installed.append(dependency)
 
-    if missing:
+    if not_installed:
         print("\nMissing dependencies. To install run:")
         print(" pip: pip install -r requirements.txt")
         print(" poetry: poetry install")
