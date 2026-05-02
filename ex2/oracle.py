@@ -3,7 +3,7 @@ import os
 
 def load_and_display_configuration() -> bool:
     try:
-        from dotenv import load_dotenv      #type: ignore
+        from dotenv import load_dotenv      # type: ignore
         load_dotenv()
         configuration: dict[str, str] = {
             "MATRIX_MODE": os.getenv("MATRIX_MODE", "development"),
@@ -20,7 +20,7 @@ def load_and_display_configuration() -> bool:
         print(f"Log Level: {configuration['LOG_LEVEL']}")
         print(f"Zion: {configuration['ZION_ENDPOINT']}")
         return True
-    
+
     except ModuleNotFoundError:
         print("ERROR: Missing dependency: python-dotenv\n")
         print("Install dotenv with: pip install python-dotenv")
