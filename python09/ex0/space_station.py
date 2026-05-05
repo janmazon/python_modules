@@ -52,6 +52,7 @@ def main() -> None:
             is_operational=True
         )
         print(f"{invalid_station}")
+
     except ValidationError as e:
         print("Expected validation error:")
         for error in e.errors():

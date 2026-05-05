@@ -82,6 +82,7 @@ def main() -> None:
             is_verified=False
         )
         print(f"{invalid_contact}")
+
     except ValidationError as e:
         print("Expected validation error:")
         for error in e.errors():
