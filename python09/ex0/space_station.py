@@ -18,10 +18,10 @@ def main() -> None:
     station = SpaceStation(
         station_id="ISS001",
         name="International Space Station",
-        crew_size="6",
+        crew_size=6,
         power_level=85.5,
         oxygen_level=92.3,
-        last_maintenance="2024-01-15T10:30:00",
+        last_maintenance=datetime(2024, 1, 15, 10, 30, 00),
         is_operational=True
     )
 
@@ -45,17 +45,18 @@ def main() -> None:
         invalid_station = SpaceStation(
             station_id="ISS001",
             name="International Space Station",
-            crew_size="25",
+            crew_size=25,
             power_level=85.5,
             oxygen_level=92.3,
-            last_maintenance="2024-01-15T10:30:00",
+            last_maintenance=datetime(2024, 1, 15, 10, 30, 00),
             is_operational=True
         )
+        print(f"{invalid_station}")
     except ValidationError as e:
         print("Expected validation error:")
         for error in e.errors():
             print(error["msg"])
- 
+
 
 if __name__ == "__main__":
     main()
