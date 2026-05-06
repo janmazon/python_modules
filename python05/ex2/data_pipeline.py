@@ -78,7 +78,7 @@ class LogProcessor(DataProcessor):
         else:
             return False
 
-    def ingest(self, data: dict | list[dict]) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             raise ValueError("Improper log data")
         elif isinstance(data, dict):
@@ -98,7 +98,7 @@ class ExportPlugin(Protocol):
 
 class CSVExporter:
     def process_output(self, data: list[tuple[int, str]]) -> None:
-        values: list = []
+        values: list[str] = []
         for element in data:
             rank, value = element
             values.append(value)
@@ -150,7 +150,7 @@ class DataStream():
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
         for proc in self.processors:
-            results: list = []
+            results: list[tuple[int, str]] = []
             for x in range(nb):
                 if proc.storage:
                     element = proc.output()

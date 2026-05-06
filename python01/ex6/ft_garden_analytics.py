@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+from typing import Self
+
+
 class Plant:
     class Stats:
         def __init__(self) -> None:
@@ -30,7 +33,7 @@ class Plant:
         return age > 365
 
     @classmethod
-    def anonymous(cls):
+    def anonymous(cls) -> Self:
         return cls("Unknown plant", 0.0, 0)
 
 

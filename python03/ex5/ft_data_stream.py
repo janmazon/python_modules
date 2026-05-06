@@ -2,7 +2,7 @@ import typing
 import random
 
 
-def gen_event() -> typing.Generator:
+def gen_event() -> typing.Generator[tuple[str, str], None, None]:
     players = ["alice", "bob", "charlie", "dylan"]
     actions = ["run", "eat", "sleep", "grab", "move",
                "climb", "swim", "release"]
@@ -12,7 +12,8 @@ def gen_event() -> typing.Generator:
         yield (player, action)
 
 
-def consume_event(list_event: list) -> typing.Generator:
+def consume_event(list_event: 
+    list[tuple[str, str]]) -> typing.Generator[tuple[str, str], None, None]:
     while len(list_event) > 0:
         index = random.randint(0, len(list_event) - 1)
         yield list_event.pop(index)

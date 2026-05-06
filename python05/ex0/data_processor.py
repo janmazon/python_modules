@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, cast
 
 
 class DataProcessor(ABC):
@@ -71,7 +71,7 @@ class LogProcessor(DataProcessor):
         else:
             return False
 
-    def ingest(self, data: dict | list[dict]) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             raise ValueError("Improper log data")
         elif isinstance(data, dict):
@@ -90,7 +90,7 @@ def main() -> None:
     print(f" Trying to validate input 'Hello': {numeric.validate('Hello')}")
     print(" Test invalid ingestion of string 'foo' without prior validation:")
     try:
-        numeric.ingest("foo")
+        numeric.ingest(cast(Any, "foo"))
     except ValueError as e:
         print(f" Got exception: {e}")
     numeric_value: list[int | float] = [1, 2, 3, 4, 5]
@@ -107,7 +107,7 @@ def main() -> None:
     print(f" Trying to validate input '42': {text.validate(42)}")
     print(" Test invalid ingestion of int '123' without prior validation:")
     try:
-        text.ingest(123)
+        text.ingest(cast(Any, 123))
     except ValueError as e:
         print(f" Got exception: {e}")
     text_value = ["Hello", "Nexus", "World"]
@@ -125,7 +125,7 @@ def main() -> None:
     print(f" Trying to validate input 'Hello': {log.validate("Hello")}")
     print(" Test invalid ingestion of list of ints without prior validation:")
     try:
-        log.ingest([1, 2, 3])
+        log.ingest(cast(Any, [1, 2, 3]))
     except ValueError as e:
         print(f" Got exception: {e}")
     log_value = [
