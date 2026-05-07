@@ -1,4 +1,4 @@
-from _collections_abc import Callable
+from collections.abc import Callable
 
 
 def heal(target: str, power: int) -> str:
@@ -16,16 +16,16 @@ def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
 
 
 def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
-    def mega_fireball(target: str, power: int) -> str: 
+    def amplified(target: str, power: int) -> str: 
         return base_spell(target, power * multiplier)
-    return mega_fireball
+    return amplified
 
 
 def conditional_caster(condition: Callable, spell: Callable) -> Callable:
     def new_spell(target: str, power: int) -> str:
         if condition(target, power):
             return spell(target, power)
-        return "Spell fizzed"
+        return "Spell fizzled"
     return new_spell
 
 
@@ -40,6 +40,30 @@ def spell_sequence(spells: list[Callable]) -> Callable:
 
 def main() -> None:
     print("\nTesting spell combiner...")
+    combo = spell_combiner(fireball, heal)
+    result_combo1, result_combo2 = combo("Dragon", 10)
+    print(f"Combined spell result: {result_combo1}, {result_combo2}")
+
+    print("\nTesting power amplifier...")
+    result_base = fireball("Dragon", 10)
+    ampli = power_amplifier(fireball, 3)
+    result_ampli = ampli("Dragon", 10)
+    print(f"Original: {result_base}")
+    print(f"Amplified: {result_ampli}")
+
+    print("\nTesting conditional caster...")
+    condition = lambda target, power: power >= 20
+    result_caster1 = conditional_caster(condition, heal)
+    result_caster2 = conditional_caster(condition, fireball)
+    print(result_caster1("Dragon", 30))
+    print(result_caster2("Dragon", 10))
+
+    print("\nTesting spell sequence...")
+    sequence = spell_sequence([fireball, heal])
+    result_sequence = sequence("Dragon", 10)
+    print("Spell sequence result (list):")
+    for spell in result_sequence:
+        print(f"{spell}")
 
 
 if __name__ == "__main__":
