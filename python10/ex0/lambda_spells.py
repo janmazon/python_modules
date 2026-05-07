@@ -15,7 +15,7 @@ def mage_stats(mages: list[dict]) -> dict:
     least_powerful = min(mages, key=lambda m: m['power'])['power']
     powers = list(map(lambda m: m['power'], mages))
     average = round(sum(powers) / len(powers), 2)
-    return {'max_power': most_powerful, 'min_power': least_powerful, 
+    return {'max_power': most_powerful, 'min_power': least_powerful,
             'avg_power': average}
 
 
