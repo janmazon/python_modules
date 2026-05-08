@@ -38,10 +38,6 @@ def spell_sequence(spells: list[Callable]) -> Callable:
     return sequence_spell
 
 
-def condition(target, power):
-    return power >= 20
-
-
 def main() -> None:
     print("\nTesting spell combiner...")
     combo = spell_combiner(fireball, heal)
@@ -56,8 +52,8 @@ def main() -> None:
     print(f"Amplified: {result_ampli}")
 
     print("\nTesting conditional caster...")
-    result_caster1 = conditional_caster(condition, heal)
-    result_caster2 = conditional_caster(condition, fireball)
+    result_caster1 = conditional_caster(lambda _, power: power >= 20, heal)
+    result_caster2 = conditional_caster(lambda _, power: power >= 20, fireball)
     print(result_caster1("Dragon", 30))
     print(result_caster2("Dragon", 10))
 

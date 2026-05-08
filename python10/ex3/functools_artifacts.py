@@ -70,6 +70,8 @@ def main() -> None:
     print("\nTesting partial enchanter...")
     enchanment = partial_enchanter(base_enchantment)
     print(f"{enchanment['Fire'](target='Sword')}")
+    print(f"{enchanment['Water'](target='Shield')}")
+    print(f"{enchanment['Air'](target='Staff')}")
 
     print("\nTesting memoized fibonacci...")
     print(f"Fib(0): {memoized_fibonacci(0)}")
